@@ -69,20 +69,82 @@ export const constantRoutes = [
         meta: { title: 'Deployment列表', icon: 'table' }
       },
       {
-        path: 'services',
-        name: 'Services',
-        component: () => import('@/views/workloads/servicelist'),
-        meta: { title: 'Service列表', icon: 'tree' }
-      },
-      {
         path: 'pods',
         name: 'pods',
         component: () => import('@/views/workloads/podlist'),
         meta: { title: 'Pod列表', icon: 'tree' }
-      }
+      },
+      {
+        path: 'podlogs',
+        name: 'Podlogs',
+        component: () => import('@/views/workloads/podlogs'),
+        meta: { title: '查看容器日志',icon: 'tree'},
+        hidden: true,
+      },
+      {
+        path: 'podshell',
+        name: 'podshell',
+        component: () => import('@/views/workloads/podshell'),
+        meta: { title: '终端操作容器',icon: 'tree'},
+        hidden: true,
+      },
     ]
   },
-
+  {
+    path: '/network',
+    component: Layout,
+    redirect: 'network/ingress-list',
+    name: 'ingress',
+    meta: {title: 'Network',icon: 'el-icon-s-help'},
+    children: [
+      {
+        path: 'ingress-list',
+        name: 'Ingresslist',
+        component: () => import('@/views/network/ingress-list'),
+        meta: {title: 'Ingress列表',icon: 'table'},
+      },
+      {
+        path: 'ingress-create',
+        name: 'Ingresscreate',
+        component: () => import('@/views/network/ingress-create'),
+        meta: {title: 'Ingress创建',icon: 'tree'},
+        hidden: true,
+      },
+      {
+        path: 'services',
+        name: 'Services',
+        component: () => import('@/views/network/servicelist'),
+        meta: { title: 'Service列表', icon: 'tree' }
+      },
+    ]
+  },
+  {
+    path: '/resourcemanager',
+    component: Layout,
+    redirect: 'resourcemanager/resource',
+    name: 'resource',
+    meta: {title: '资源管理',icon: 'el-icon-s-help'},
+    children: [
+      {
+        path: 'secrets',
+        name: 'Secrets',
+        component: () => import('@/views/resourcemanger/secretslist'),
+        meta: {title: 'Secret列表',icon: 'table'},
+      },
+      {
+        path: 'configmaps',
+        name: 'Configmaps',
+        component: () => import('@/views/resourcemanger/configmap'),
+        meta: {title: 'Configmap列表',icon: 'table'},
+      },
+      {
+        path: 'secretscreate',
+        name: 'Secretscreate',
+        component: ()=>import('@/views/resourcemanger/secretCreate'),
+        meta: {title: '创建Secret',icon: 'table'},
+      },
+    ]
+  },
   {
     path: '/form',
     component: Layout,
@@ -92,76 +154,6 @@ export const constantRoutes = [
         name: 'Form',
         component: () => import('@/views/form/index'),
         meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
-      }
-    ]
-  },
-
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
       }
     ]
   },
